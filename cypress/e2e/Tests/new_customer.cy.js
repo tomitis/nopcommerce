@@ -9,16 +9,25 @@ describe('adding a new customer', () => {
     // })
     
 
+    it.only('confirming the dropdown elements', () => {
+
+
+        const expectedOptions = ['Customers', 'Vendors'];
+
+        cy.get('a.nav-link').contains('Customer').click({ force: true }).contains('Customers').click({ force: true });
+        cy.get('.fa').click();
+        cy.get('a.nav-link').contains('Customer').click();
+        cy.get('ul.nav-treeview').then(options => {
+            // Extract the text content of each option
+            const actualOptions = Cypress.$.map(options, option => Cypress.$(option).text().trim());
+          
+            cy.log(actualOptions)
+            // Check that the actual options match the expected options
+            //expect(actualOptions).to.equal(expectedOptions);
+          });
+    })
+
     it('adding a new user', () => {
-
-        // cy.login();
-        // cy.fixture('dropdown_ele').then((data) => {
-        //     const expectedOptions = data.options;
-
-        //     cy.get('a.nav-link').contains('Customer').click().then((options) => {
-        //         // const actualOptions = options.map(option => option.text().trim());
-        //         console.log(options);
-        //     })
 
 
         cy.get('a.nav-link').contains('Customer').click({ force: true }).contains('Customers').click({ force: true });
@@ -69,5 +78,7 @@ describe('adding a new customer', () => {
            })
 
     })
+
+  
 
 })
